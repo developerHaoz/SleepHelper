@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group_one">
+        <item
+            android:id="@+id/menu_me_item_club_info"
+            android:icon="@mipmap/ic_launcher"
+            android:title="社团资料" />
+        <item
+            android:id="@+id/menu_me_item_switch"
+            android:icon="@mipmap/ic_launcher"
+            android:title="切换社团" />
+
+        <item
+            android:id="@+id/menu_me_item_join"
+            android:icon="@mipmap/ic_launcher"
+            android:title="加入社团" />
+
+        <item
+            android:id="@+id/menu_me_item_build"
+            android:icon="@mipmap/ic_launcher"
+            android:title="创建社团" />
+
+    </group>
+    <group android:id="@+id/group_two">
+        <item
+            android:id="@+id/menu_me_item_card"
+            android:icon="@mipmap/ic_launcher"
+            android:title="我的名片" />
+        <item
+            android:id="@+id/menu_me_item_collection"
+            android:icon="@mipmap/ic_launcher"
+            android:title="我的收藏" />
+        <item
+            android:id="@+id/menu_me_item_attention"
+            android:icon="@mipmap/ic_launcher"
+            android:title="我的关注" />
+    </group>
+</menu>
