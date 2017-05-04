@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SleepHelper</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
+    <string name="item1">看爸爸的帅照</string>
+    <string name="item2">切换夜间模式</string>
+    <string name="item3">关于我们</string>
+    <string name="item4">反馈</string>
 </resources>

@@ -4,35 +4,22 @@
         <item
             android:id="@+id/menu_me_item_club_info"
             android:icon="@mipmap/ic_launcher"
-            android:title="社团资料" />
+            android:title="@string/item1" />
         <item
             android:id="@+id/menu_me_item_switch"
             android:icon="@mipmap/ic_launcher"
-            android:title="切换社团" />
+            android:title="@string/item2" />
 
         <item
             android:id="@+id/menu_me_item_join"
             android:icon="@mipmap/ic_launcher"
-            android:title="加入社团" />
+            android:title="@string/item3" />
 
         <item
             android:id="@+id/menu_me_item_build"
             android:icon="@mipmap/ic_launcher"
-            android:title="创建社团" />
+            android:title="@string/item4" />
 
     </group>
-    <group android:id="@+id/group_two">
-        <item
-            android:id="@+id/menu_me_item_card"
-            android:icon="@mipmap/ic_launcher"
-            android:title="我的名片" />
-        <item
-            android:id="@+id/menu_me_item_collection"
-            android:icon="@mipmap/ic_launcher"
-            android:title="我的收藏" />
-        <item
-            android:id="@+id/menu_me_item_attention"
-            android:icon="@mipmap/ic_launcher"
-            android:title="我的关注" />
-    </group>
+
 </menu>

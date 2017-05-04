@@ -2,13 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.developerhaoz.sleephelper">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:name=".utils.SleepApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--添加日记-->
+        <activity android:name=".diary.ui.AddDiaryActivity"/>
+
+        <!--测试用的 Activity-->
+        <activity android:name=".common.TestActivity">
+        </activity>
+
+        <!--修改日记-->
+        <activity android:name=".diary.ui.UpdateDiaryActivity"/>
+
+        <!--主界面的 Activity-->
         <activity android:name=".common.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
