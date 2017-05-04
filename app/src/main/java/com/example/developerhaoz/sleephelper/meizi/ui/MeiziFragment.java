@@ -3,6 +3,7 @@ package com.example.developerhaoz.sleephelper.meizi.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -36,10 +37,13 @@ public class MeiziFragment extends Fragment {
 
     @Bind(R.id.meizi_rv_show_meizi)
     RecyclerView mRvShowMeizi;
+    @Bind(R.id.meizi_refresh)
+    SwipeRefreshLayout mRefresh;
 
     String testUrl = "http://ww3.sinaimg.cn/large/7a8aed7bgw1eswencfur6j20hq0qodhs.jpg";
     List<MeiziBean> meiziBeanList = new ArrayList<>();
     private static String response = "";
+
 
     public static MeiziFragment newInstance() {
         return new MeiziFragment();
@@ -50,39 +54,41 @@ public class MeiziFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meizi, container, false);
         ButterKnife.bind(this, view);
-        mRvShowMeizi.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        meiziBeanList.add(new MeiziBean(testUrl));
-        meiziBeanList.add(new MeiziBean(testUrl));
-        meiziBeanList.add(new MeiziBean(testUrl));
-        meiziBeanList.add(new MeiziBean(testUrl));
-        meiziBeanList.add(new MeiziBean(testUrl));
-        meiziBeanList.add(new MeiziBean(testUrl));
-        meiziBeanList.add(new MeiziBean(testUrl));
-        meiziBeanList.add(new MeiziBean(testUrl));
-//        doGetDiaryBeanList();
-        mRvShowMeizi.setAdapter(new MeiziAdapter(meiziBeanList, this));
+        initView();
+        refreshMeizi();
         return view;
     }
 
-        private void doGetDiaryBeanList() {
+    private void refreshMeizi() {
+        mRefresh.setColorSchemeResources(R.color.colorPrimary);
+        mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initView();
+                mRefresh.setRefreshing(false);
+            }
+        });
+    }
 
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-            StringRequest stringRequest = new StringRequest(MeiziApi.getMeiziApi(), new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
-                    response = s;
-                    meiziBeanList = GsonHelper.getMeiziBean(response);
-                    mRvShowMeizi.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                    mRvShowMeizi.setAdapter(new MeiziAdapter(meiziBeanList, MeiziFragment.this));
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Logger.d(error);
-                }
-            });
-            requestQueue.add(stringRequest);
-        }
+    private void initView() {
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(MeiziApi.getMeiziApi(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                response = s;
+                meiziBeanList = GsonHelper.getMeiziBean(response);
+                mRvShowMeizi.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                mRvShowMeizi.setAdapter(new MeiziAdapter(meiziBeanList, MeiziFragment.this));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Logger.d(error);
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
 
     @Override
     public void onDestroyView() {

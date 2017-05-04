@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.developerhaoz.sleephelper.R;
 import com.example.developerhaoz.sleephelper.meizi.bean.MeiziBean;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -35,15 +37,23 @@ public class MeiziAdapter extends RecyclerView.Adapter<MeiziAdapter.MeiziViewHol
     }
 
     @Override
-    public void onBindViewHolder(MeiziViewHolder holder, int position) {
+    public void onBindViewHolder(MeiziViewHolder holder, final int position) {
 
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-
         Glide.with(mFragment)
                 .load(mMeiziBeanList.get(position).getImageUrl())
-//                .override(200, 100)
+                .asBitmap()
+                .fitCenter()
+                .dontAnimate()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(holder.mIvMeizi);
 
+        holder.mIvMeizi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Logger.d(position);
+            }
+        });
 
     }
 

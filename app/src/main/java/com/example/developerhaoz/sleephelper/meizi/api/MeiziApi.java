@@ -28,7 +28,7 @@ public class MeiziApi {
      */
     public static String getMeiziApi(){
         StringBuilder meiziApi = new StringBuilder();
-        meiziApi.append("http://gank.io/api/data/%E7%A6%8F%E5%88%A9/").append("10").append("/" + GetRandom.getRandom());
+        meiziApi.append("http://gank.io/api/data/%E7%A6%8F%E5%88%A9/").append("15").append("/" + GetRandom.getRandom());
         return String.valueOf(meiziApi);
     }
 
@@ -49,7 +49,6 @@ public class MeiziApi {
         });
         SleepApplication sleepApplication = new SleepApplication();
         requestQueue.add(stringRequest);
-        Logger.d(meiziData);
         return meiziData;
     }
 

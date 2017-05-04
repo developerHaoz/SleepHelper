@@ -13,7 +13,7 @@ public class GetRandom {
      */
     public static int getRandom(){
         double random = Math.random();
-        int result = (int)(random * 50 - 2);
+        int result = (int)(random * 50 - 20);
         return Math.abs(result);
     }
 
