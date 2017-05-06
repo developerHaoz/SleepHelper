@@ -1,4 +1,4 @@
-package com.example.developerhaoz.sleephelper.common;
+package com.example.developerhaoz.sleephelper.common.view;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
 

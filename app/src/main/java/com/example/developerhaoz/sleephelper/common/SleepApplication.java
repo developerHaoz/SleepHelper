@@ -1,4 +1,4 @@
-package com.example.developerhaoz.sleephelper.utils;
+package com.example.developerhaoz.sleephelper.common;
 
 import android.app.Application;
 import android.content.Context;

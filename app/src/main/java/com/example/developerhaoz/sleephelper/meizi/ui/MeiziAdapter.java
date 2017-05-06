@@ -34,30 +34,28 @@ public class MeiziAdapter extends RecyclerView.Adapter<MeiziAdapter.MeiziViewHol
     @Override
     public MeiziViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meizi, null);
-        MeiziViewHolder meiziViewHolder = new MeiziViewHolder(view);
-        return meiziViewHolder;
+        return new MeiziViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MeiziViewHolder holder, final int position) {
 
-        ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
         Glide.with(mFragment)
                 .load(mMeiziBeanList.get(position).getImageUrl())
-                .asBitmap()
                 .fitCenter()
                 .dontAnimate()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.mIvMeizi);
 
         holder.mIvMeizi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> resultList = new ArrayList();
+                ArrayList<String> resultList = new ArrayList<String>();
                 for (MeiziBean meiziBean : mMeiziBeanList) {
                     resultList.add(meiziBean.getImageUrl());
                 }
                 DetailActivity.startActivity(mFragment.getActivity(), resultList, position);
+
             }
         });
 

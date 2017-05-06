@@ -1,4 +1,4 @@
-package com.example.developerhaoz.sleephelper.common;
+package com.example.developerhaoz.sleephelper.common.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

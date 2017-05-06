@@ -1,4 +1,4 @@
-package com.example.developerhaoz.sleephelper.utils.common;
+package com.example.developerhaoz.sleephelper.common.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

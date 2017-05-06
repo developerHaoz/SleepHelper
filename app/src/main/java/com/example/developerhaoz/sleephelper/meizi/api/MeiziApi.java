@@ -1,14 +1,13 @@
 package com.example.developerhaoz.sleephelper.meizi.api;
 
 import android.content.Context;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.developerhaoz.sleephelper.utils.GetRandom;
-import com.example.developerhaoz.sleephelper.utils.SleepApplication;
+import com.example.developerhaoz.sleephelper.common.utils.GetRandom;
+import com.example.developerhaoz.sleephelper.common.SleepApplication;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -24,7 +23,7 @@ public class MeiziApi {
     /**
      * 返回一个随机生成的妹子 Api
      *
-     * @return
+     * @return meizi Api
      */
     public static String getMeiziApi(){
         StringBuilder meiziApi = new StringBuilder();
@@ -39,7 +38,6 @@ public class MeiziApi {
             @Override
             public void onResponse(String s) {
                 meiziData = s;
-                Logger.d(meiziData);
             }
         }, new Response.ErrorListener() {
             @Override

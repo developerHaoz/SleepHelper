@@ -18,7 +18,7 @@ import com.example.developerhaoz.sleephelper.diary.db.DiaryDatabaseHelper;
 import com.example.developerhaoz.sleephelper.diary.utils.AppManager;
 import com.example.developerhaoz.sleephelper.diary.utils.GetDate;
 import com.example.developerhaoz.sleephelper.diary.widget.LinedEditText;
-import com.example.developerhaoz.sleephelper.utils.common.StatusBarCompat;
+import com.example.developerhaoz.sleephelper.common.utils.StatusBarCompat;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

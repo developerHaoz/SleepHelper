@@ -9,11 +9,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.developerhaoz.sleephelper.R;
-import com.example.developerhaoz.sleephelper.common.CommonPagerAdapter;
+import com.example.developerhaoz.sleephelper.common.utils.Check;
+import com.example.developerhaoz.sleephelper.common.view.CommonPagerAdapter;
+import com.example.developerhaoz.sleephelper.common.view.GlideHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import bolts.Continuation;
+import bolts.Task;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -25,8 +30,21 @@ import butterknife.ButterKnife;
 
 public class DetailActivity extends AppCompatActivity {
 
+    /**
+     * 保存图片网络地址的 List
+     */
     private List<String> mImageUrlList;
+
+    /**
+     * ViewPager 中所有的 Fragment
+     */
     private List<Fragment> mFragments;
+
+    /**
+     * 保存图片缓存地址的 List
+     */
+    private List<String> mCachePathList;
+
     private static final String IMAGE_URL_LIST = "imageUrlList";
     private static final String POSITION = "position";
 
@@ -37,7 +55,7 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = new Intent(context, DetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putStringArrayList(IMAGE_URL_LIST, imageUrlList);
-        bundle.putInt(POSITION, -1);
+        bundle.putInt(POSITION, position);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
@@ -48,20 +66,42 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         Bundle bundle = getIntent().getExtras();
-
         mImageUrlList = new ArrayList<>();
         mFragments = new ArrayList<>();
+        mCachePathList = new ArrayList<>();
         int position = getIntent().getIntExtra(POSITION, -1);
         mImageUrlList = getIntent().getStringArrayListExtra(IMAGE_URL_LIST);
+        initViewWithCache(position);
+    }
 
-
-        for (String imageUrl : mImageUrlList) {
-            DetailFragment fragment = DetailFragment.newInstance(imageUrl);
-            mFragments.add(fragment);
-            CommonPagerAdapter adapter = new CommonPagerAdapter(getSupportFragmentManager(), mFragments);
-            mVpShowPhoto.setAdapter(adapter);
-        }
-
+    /**
+     * 通过图片的缓存地址来初始化界面
+     */
+    private void initViewWithCache(final int position) {
+        Task.call(new Callable<List<String>>() {
+            @Override
+            public List<String> call() throws Exception {
+                for (String imageUrl : mImageUrlList) {
+                    mCachePathList.add(GlideHelper.getImagePathFromCache(imageUrl, DetailActivity.this));
+                }
+                return mCachePathList;
+            }
+        }, Task.BACKGROUND_EXECUTOR).continueWith(new Continuation<List<String>, Object>() {
+            @Override
+            public Object then(Task<List<String>> task) throws Exception {
+                List<String> mCachePathList = task.getResult();
+                if(!Check.isEmpty(mCachePathList)){
+                    for (String cachePath : mCachePathList) {
+                        DetailFragment fragment = DetailFragment.newInstance(cachePath);
+                        mFragments.add(fragment);
+                    }
+                    CommonPagerAdapter adapter = new CommonPagerAdapter(getSupportFragmentManager(), mFragments);
+                    mVpShowPhoto.setAdapter(adapter);
+                    mVpShowPhoto.setCurrentItem(position);
+                }
+                return null;
+            }
+        }, Task.UI_THREAD_EXECUTOR);
     }
 }
 

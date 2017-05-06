@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.developerhaoz.sleephelper.R;
+import com.example.developerhaoz.sleephelper.common.view.CommonPagerAdapter;
+import com.example.developerhaoz.sleephelper.common.view.CommonTabBean;
 import com.example.developerhaoz.sleephelper.diary.bean.DiaryBean;
 import com.example.developerhaoz.sleephelper.diary.event.StartUpdateDiaryEvent;
 import com.example.developerhaoz.sleephelper.diary.ui.DiaryFragment;

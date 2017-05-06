@@ -1,6 +1,8 @@
-package com.example.developerhaoz.sleephelper.utils;
+package com.example.developerhaoz.sleephelper.common.utils;
 
 /**
+ * 获取随机数的工具类
+ *
  * Created by developerHaoz on 2017/5/3.
  */
 

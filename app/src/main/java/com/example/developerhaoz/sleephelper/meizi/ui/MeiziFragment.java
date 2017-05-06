@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
 import com.example.developerhaoz.sleephelper.R;
-import com.example.developerhaoz.sleephelper.common.VolleyHelper;
-import com.example.developerhaoz.sleephelper.common.VolleyResponseCallback;
+import com.example.developerhaoz.sleephelper.common.net.VolleyHelper;
+import com.example.developerhaoz.sleephelper.common.net.VolleyResponseCallback;
 import com.example.developerhaoz.sleephelper.meizi.api.MeiziApi;
 import com.example.developerhaoz.sleephelper.meizi.bean.MeiziBean;
 import com.example.developerhaoz.sleephelper.meizi.utils.GsonHelper;
@@ -70,7 +70,6 @@ public class MeiziFragment extends Fragment {
 
     private void initView() {
 
-
         VolleyHelper.sendHttpGet(getActivity(), MeiziApi.getMeiziApi(), new VolleyResponseCallback() {
             @Override
             public void onSuccess(String s) {
@@ -85,22 +84,6 @@ public class MeiziFragment extends Fragment {
 
             }
         });
-//        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-//        StringRequest stringRequest = new StringRequest(MeiziApi.getMeiziApi(), new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String s) {
-//                response = s;
-//                meiziBeanList = GsonHelper.getMeiziBean(response);
-//                mRvShowMeizi.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-//                mRvShowMeizi.setAdapter(new MeiziAdapter(meiziBeanList, MeiziFragment.this));
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Logger.d(error);
-//            }
-//        });
-//        requestQueue.add(stringRequest);
     }
 
     @Override
