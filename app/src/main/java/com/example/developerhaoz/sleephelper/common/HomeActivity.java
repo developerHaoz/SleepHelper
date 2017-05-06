@@ -153,6 +153,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        // TODO: 在主页面按返回键时弹出对话框，提示用户是否退出程序
+    }
 }
 
 

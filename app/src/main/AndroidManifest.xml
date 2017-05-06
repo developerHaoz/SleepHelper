@@ -31,6 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!--查看图片的播放页面-->
+        <activity android:name=".meizi.ui.DetailActivity"/>
     </application>
 
 </manifest>

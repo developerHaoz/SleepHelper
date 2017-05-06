@@ -4,7 +4,6 @@ import com.example.developerhaoz.sleephelper.meizi.bean.MeiziBean;
 import com.example.developerhaoz.sleephelper.meizi.event.MeiziBeanListEvent;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -35,7 +34,6 @@ public class GsonHelper {
             e.printStackTrace();
         }
         if (meiziBeanList.size() > 0){
-            Logger.d(meiziBeanList.size());
             EventBus.getDefault().post(new MeiziBeanListEvent(meiziBeanList));
         }
         return meiziBeanList;

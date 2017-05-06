@@ -10,16 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.developerhaoz.sleephelper.R;
+import com.example.developerhaoz.sleephelper.common.VolleyHelper;
+import com.example.developerhaoz.sleephelper.common.VolleyResponseCallback;
 import com.example.developerhaoz.sleephelper.meizi.api.MeiziApi;
 import com.example.developerhaoz.sleephelper.meizi.bean.MeiziBean;
 import com.example.developerhaoz.sleephelper.meizi.utils.GsonHelper;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +37,8 @@ public class MeiziFragment extends Fragment {
     @Bind(R.id.meizi_refresh)
     SwipeRefreshLayout mRefresh;
 
-    String testUrl = "http://ww3.sinaimg.cn/large/7a8aed7bgw1eswencfur6j20hq0qodhs.jpg";
     List<MeiziBean> meiziBeanList = new ArrayList<>();
     private static String response = "";
-
 
     public static MeiziFragment newInstance() {
         return new MeiziFragment();
@@ -59,6 +54,9 @@ public class MeiziFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 刷新当前界面
+     */
     private void refreshMeizi() {
         mRefresh.setColorSchemeResources(R.color.colorPrimary);
         mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -72,22 +70,37 @@ public class MeiziFragment extends Fragment {
 
     private void initView() {
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(MeiziApi.getMeiziApi(), new Response.Listener<String>() {
+
+        VolleyHelper.sendHttpGet(getActivity(), MeiziApi.getMeiziApi(), new VolleyResponseCallback() {
             @Override
-            public void onResponse(String s) {
+            public void onSuccess(String s) {
                 response = s;
                 meiziBeanList = GsonHelper.getMeiziBean(response);
                 mRvShowMeizi.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 mRvShowMeizi.setAdapter(new MeiziAdapter(meiziBeanList, MeiziFragment.this));
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Logger.d(error);
+            public void onError(VolleyError error) {
+
             }
         });
-        requestQueue.add(stringRequest);
+//        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+//        StringRequest stringRequest = new StringRequest(MeiziApi.getMeiziApi(), new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String s) {
+//                response = s;
+//                meiziBeanList = GsonHelper.getMeiziBean(response);
+//                mRvShowMeizi.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+//                mRvShowMeizi.setAdapter(new MeiziAdapter(meiziBeanList, MeiziFragment.this));
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Logger.d(error);
+//            }
+//        });
+//        requestQueue.add(stringRequest);
     }
 
     @Override

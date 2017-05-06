@@ -11,11 +11,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.developerhaoz.sleephelper.R;
 import com.example.developerhaoz.sleephelper.meizi.bean.MeiziBean;
-import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * MeiziFragment 的 Adapter
+ *
  * Created by developerHaoz on 2017/5/3.
  */
 
@@ -51,7 +53,11 @@ public class MeiziAdapter extends RecyclerView.Adapter<MeiziAdapter.MeiziViewHol
         holder.mIvMeizi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Logger.d(position);
+                ArrayList<String> resultList = new ArrayList();
+                for (MeiziBean meiziBean : mMeiziBeanList) {
+                    resultList.add(meiziBean.getImageUrl());
+                }
+                DetailActivity.startActivity(mFragment.getActivity(), resultList, position);
             }
         });
 

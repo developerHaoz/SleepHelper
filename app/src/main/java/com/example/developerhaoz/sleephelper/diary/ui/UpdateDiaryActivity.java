@@ -12,13 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.example.developerhaoz.sleephelper.R;
-import com.example.developerhaoz.sleephelper.common.HomeActivity;
 import com.example.developerhaoz.sleephelper.diary.db.DiaryDatabaseHelper;
 import com.example.developerhaoz.sleephelper.diary.utils.AppManager;
 import com.example.developerhaoz.sleephelper.diary.utils.GetDate;
 import com.example.developerhaoz.sleephelper.diary.widget.LinedEditText;
 import com.example.developerhaoz.sleephelper.utils.common.StatusBarCompat;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -95,7 +96,7 @@ public class UpdateDiaryActivity extends AppCompatActivity {
                         String tag = mTvTag.getText().toString();
                         SQLiteDatabase dbDelete = mHelper.getWritableDatabase();
                         dbDelete.delete("Diary", "tag = ?", new String[]{tag});
-                        HomeActivity.startActivity(UpdateDiaryActivity.this);
+                        finish();
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -111,10 +112,10 @@ public class UpdateDiaryActivity extends AppCompatActivity {
                 valuesUpdate.put("content", content);
                 dbUpdate.update("Diary", valuesUpdate, "title = ?", new String[]{title});
                 dbUpdate.update("Diary", valuesUpdate, "content = ?", new String[]{content});
-                HomeActivity.startActivity(this);
+                finish();
                 break;
             case R.id.update_diary_fab_delete:
-                HomeActivity.startActivity(this);
+                finish();
                 break;
         }
     }
@@ -123,6 +124,6 @@ public class UpdateDiaryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        HomeActivity.startActivity(this);
+        finish();
     }
 }

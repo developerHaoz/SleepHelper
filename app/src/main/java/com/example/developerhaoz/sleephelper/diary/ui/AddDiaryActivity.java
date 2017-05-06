@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.developerhaoz.sleephelper.R;
-import com.example.developerhaoz.sleephelper.common.HomeActivity;
 import com.example.developerhaoz.sleephelper.diary.db.DiaryDatabaseHelper;
 import com.example.developerhaoz.sleephelper.diary.utils.AppManager;
 import com.example.developerhaoz.sleephelper.diary.utils.GetDate;
@@ -36,7 +35,6 @@ import cc.trity.floatingactionbutton.FloatingActionsMenu;
 
 public class AddDiaryActivity extends AppCompatActivity {
 
-
     @Bind(R.id.add_diary_tv_date)
     TextView mAddDiaryTvDate;
     @Bind(R.id.add_diary_et_title)
@@ -56,13 +54,6 @@ public class AddDiaryActivity extends AppCompatActivity {
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, AddDiaryActivity.class);
-        context.startActivity(intent);
-    }
-
-    public static void startActivity(Context context, String title, String content) {
-        Intent intent = new Intent(context, AddDiaryActivity.class);
-        intent.putExtra("title", title);
-        intent.putExtra("content", content);
         context.startActivity(intent);
     }
 
@@ -104,7 +95,8 @@ public class AddDiaryActivity extends AppCompatActivity {
                     db.insert("Diary", null, values);
                     values.clear();
                 }
-                HomeActivity.startActivity(AddDiaryActivity.this);
+                finish();
+//                HomeActivity.startActivity(AddDiaryActivity.this);
                 break;
             case R.id.add_diary_fab_add:
                 final String dateBack = GetDate.getDate().toString();
@@ -121,15 +113,15 @@ public class AddDiaryActivity extends AppCompatActivity {
                             values.put("content", contentBack);
                             db.insert("Diary", null, values);
                             values.clear();
-                            HomeActivity.startActivity(AddDiaryActivity.this);
+                            finish();
                         }
                     }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            HomeActivity.startActivity(AddDiaryActivity.this);
+                            finish();
                         }
                     }).show();
                 }else{
-                    HomeActivity.startActivity(AddDiaryActivity.this);
+                    finish();
                 }
 
                 break;
@@ -139,6 +131,6 @@ public class AddDiaryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        HomeActivity.startActivity(AddDiaryActivity.this);
+        finish();
     }
 }

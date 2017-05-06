@@ -9,17 +9,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.developerhaoz.sleephelper.R;
 import com.example.developerhaoz.sleephelper.diary.bean.DiaryBean;
 import com.example.developerhaoz.sleephelper.diary.event.StartUpdateDiaryEvent;
 import com.example.developerhaoz.sleephelper.diary.utils.GetDate;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
 
 /**
+ * 日记界面的 Adapter
+ *
  * Created by developerHaoz on 2017/5/3.
  */
 

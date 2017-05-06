@@ -20,7 +20,6 @@ import com.example.developerhaoz.sleephelper.R;
 import com.example.developerhaoz.sleephelper.diary.bean.DiaryBean;
 import com.example.developerhaoz.sleephelper.diary.db.DiaryDatabaseHelper;
 import com.example.developerhaoz.sleephelper.diary.utils.GetDate;
-import com.example.developerhaoz.sleephelper.diary.utils.SpHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ import butterknife.OnClick;
 
 /**
  * 有关日记的 Fragment
- * <p>
+ *
  * Created by developerHaoz on 2017/5/2.
  */
 
@@ -60,14 +59,7 @@ public class DiaryFragment extends Fragment {
     private List<DiaryBean> mDiaryBeanList;
     private DiaryDatabaseHelper mDatabaseHelper;
 
-    private static String IS_WRITE = "true";
     private static final String DB_DIARY_NAME = "Diary.db";
-    private int mEditPosition = -1;
-
-    /**
-     * 用于标记今天是否已经写了日记
-     */
-    private boolean isWrite = false;
 
     public static DiaryFragment newInstance() {
         return new DiaryFragment();
@@ -79,7 +71,6 @@ public class DiaryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_diary, container, false);
         ButterKnife.bind(this, view);
         mDatabaseHelper = new DiaryDatabaseHelper(getActivity(), DB_DIARY_NAME, null, 1);
-        SpHelper spHelper = SpHelper.getInstance(getActivity());
         getDiaryBeanList();
         initTitle();
         initView();
@@ -102,13 +93,11 @@ public class DiaryFragment extends Fragment {
         Cursor cursor = sqliteDatabase.query("Diary", null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
-
             do {
                 String date = cursor.getString(cursor.getColumnIndex("date"));
                 String dateSystem = GetDate.getDate().toString();
                 if (date.equals(dateSystem)) {
                     mLlMain.removeView(mItemFirst);
-
                 }
                 break;
             } while (cursor.moveToNext());
@@ -133,6 +122,13 @@ public class DiaryFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getDiaryBeanList();
+        initView();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
@@ -142,6 +138,7 @@ public class DiaryFragment extends Fragment {
     public void onViewClicked() {
         AddDiaryActivity.startActivity(getActivity());
     }
+
 }
 
 

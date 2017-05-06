@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <uk.co.senab.photoview.PhotoView
-        android:id="@+id/test_pv_show_photo"
+        android:id="@+id/detail_pv_show_photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>

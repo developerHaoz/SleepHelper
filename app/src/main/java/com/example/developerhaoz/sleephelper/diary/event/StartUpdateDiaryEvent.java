@@ -19,10 +19,4 @@ public class StartUpdateDiaryEvent {
     public DiaryBean getDiaryBean() {
         return mDiaryBean;
     }
-
-    public void setDiaryBean(DiaryBean diaryBean) {
-        mDiaryBean = diaryBean;
-    }
-
-
 }
