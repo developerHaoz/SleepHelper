@@ -103,6 +103,12 @@ public class DetailActivity extends AppCompatActivity {
             }
         }, Task.UI_THREAD_EXECUTOR);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
 
 

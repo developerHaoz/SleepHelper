@@ -6,6 +6,8 @@
               android:orientation="vertical"
     >
 
+    <include layout="@layout/layout_app_toolbar"/>
+
     <TextView
         android:id="@+id/update_diary_tv_tag"
         android:layout_width="0.001dp"

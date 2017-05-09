@@ -42,11 +42,11 @@
         android:id="@+id/home_navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/layout_home_header"
-        app:menu="@menu/menu_me">
-
+        app:menu="@menu/menu_me"
+        >
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

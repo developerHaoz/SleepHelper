@@ -5,20 +5,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.developerhaoz.sleephelper.R;
 import com.example.developerhaoz.sleephelper.diary.db.DiaryDatabaseHelper;
-import com.example.developerhaoz.sleephelper.diary.utils.AppManager;
 import com.example.developerhaoz.sleephelper.diary.utils.GetDate;
 import com.example.developerhaoz.sleephelper.diary.widget.LinedEditText;
-import com.example.developerhaoz.sleephelper.common.utils.StatusBarCompat;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,7 +28,7 @@ import cc.trity.floatingactionbutton.FloatingActionsMenu;
 
 /**
  * 修改日记的 Activity
- *
+ * <p>
  * Created by developerHaoz on 2017/5/3.
  */
 
@@ -50,6 +50,14 @@ public class UpdateDiaryActivity extends AppCompatActivity {
     FloatingActionsMenu mRightLabels;
     @Bind(R.id.update_diary_tv_tag)
     TextView mTvTag;
+    @Bind(R.id.home_iv_draw)
+    ImageView mIvDraw;
+    @Bind(R.id.home_tv_title)
+    TextView mTvTitle;
+    @Bind(R.id.home_iv_menu)
+    ImageView mIvMenu;
+    @Bind(R.id.contacts_tab_rl)
+    LinearLayout mContactsTabRl;
 
     private DiaryDatabaseHelper mHelper;
 
@@ -65,43 +73,39 @@ public class UpdateDiaryActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_diary);
-        AppManager.getAppManager().addActivity(this);
         ButterKnife.bind(this);
         mHelper = new DiaryDatabaseHelper(this, "Diary.db", null, 1);
-        StatusBarCompat.compat(this, Color.parseColor("#161414"));
-
         Intent intent = getIntent();
+        initToolbar();
+        initView(intent);
+    }
+
+    private void initToolbar() {
+        mIvDraw.setImageResource(R.drawable.app_back);
+        mIvDraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mTvTitle.setText("修改日记");
+        mIvMenu.setVisibility(View.GONE);
+    }
+
+    private void initView(Intent intent) {
         mUpdateDiaryTvDate.setText("今天，" + GetDate.getDate());
         mUpdateDiaryEtTitle.setText(intent.getStringExtra("title"));
         mUpdateDiaryEtContent.setText(intent.getStringExtra("content"));
         mTvTag.setText(intent.getStringExtra("tag"));
-
     }
 
-    @OnClick({R.id.update_diary_tv_date, R.id.update_diary_et_title, R.id.update_diary_et_content, R.id.update_diary_fab_back, R.id.update_diary_fab_add, R.id.update_diary_fab_delete})
+    @OnClick({R.id.home_iv_draw, R.id.update_diary_fab_back, R.id.update_diary_fab_add, R.id.update_diary_fab_delete})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.update_diary_tv_date:
-                break;
-            case R.id.update_diary_et_title:
-                break;
-            case R.id.update_diary_et_content:
-                break;
+            case R.id.home_iv_draw:
+                finish();
             case R.id.update_diary_fab_back:
-                android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(this);
-                alertDialogBuilder.setMessage("确定要删除该日记吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-//                        String title = mUpdateDiaryEtTitle.getText().toString();
-                        String tag = mTvTag.getText().toString();
-                        SQLiteDatabase dbDelete = mHelper.getWritableDatabase();
-                        dbDelete.delete("Diary", "tag = ?", new String[]{tag});
-                        finish();
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                }).show();
+                showTips();
                 break;
             case R.id.update_diary_fab_add:
                 SQLiteDatabase dbUpdate = mHelper.getWritableDatabase();
@@ -120,6 +124,20 @@ public class UpdateDiaryActivity extends AppCompatActivity {
         }
     }
 
+    private void showTips() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("确定要删除该日记吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String tag = mTvTag.getText().toString();
+                SQLiteDatabase dbDelete = mHelper.getWritableDatabase();
+                dbDelete.delete("Diary", "tag = ?", new String[]{tag});
+                finish();
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        }).show();
+    }
 
     @Override
     public void onBackPressed() {

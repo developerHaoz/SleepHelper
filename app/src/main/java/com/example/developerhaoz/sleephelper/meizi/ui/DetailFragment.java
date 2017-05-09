@@ -17,7 +17,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * 显示大图的 Fragment
- * <p>
+ *
  * Created by developerHaoz on 2017/5/5.
  */
 

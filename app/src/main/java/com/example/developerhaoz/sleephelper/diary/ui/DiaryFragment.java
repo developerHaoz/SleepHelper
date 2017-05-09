@@ -72,18 +72,14 @@ public class DiaryFragment extends Fragment {
         ButterKnife.bind(this, view);
         mDatabaseHelper = new DiaryDatabaseHelper(getActivity(), DB_DIARY_NAME, null, 1);
         getDiaryBeanList();
-        initTitle();
         initView();
         return view;
     }
 
     private void initView() {
+        mTvDate.setText(GetDate.getDate());
         mRvShowDiary.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvShowDiary.setAdapter(new DiaryAdapter(getActivity(), mDiaryBeanList));
-    }
-
-    private void initTitle() {
-
     }
 
     private void getDiaryBeanList() {

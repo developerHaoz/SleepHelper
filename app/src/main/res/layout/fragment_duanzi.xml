@@ -3,12 +3,17 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/duanzi_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is DuanziFragment"
-        android:layout_gravity="center"
-        android:gravity="center"
-        />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/duanzi_rv_show_duanzi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

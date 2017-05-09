@@ -9,9 +9,12 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.developerhaoz.sleephelper.R;
 import com.example.developerhaoz.sleephelper.common.view.CommonPagerAdapter;
@@ -20,7 +23,7 @@ import com.example.developerhaoz.sleephelper.diary.bean.DiaryBean;
 import com.example.developerhaoz.sleephelper.diary.event.StartUpdateDiaryEvent;
 import com.example.developerhaoz.sleephelper.diary.ui.DiaryFragment;
 import com.example.developerhaoz.sleephelper.diary.ui.UpdateDiaryActivity;
-import com.example.developerhaoz.sleephelper.duanzi.DuanziFragment;
+import com.example.developerhaoz.sleephelper.duanzi.ui.DuanziFragment;
 import com.example.developerhaoz.sleephelper.meizi.ui.MeiziFragment;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -49,22 +52,26 @@ public class HomeActivity extends AppCompatActivity {
     CommonTabLayout mHomeTabLayout;
     @Bind(R.id.home_dl)
     DrawerLayout mDrawerLayout;
-    @Bind(R.id.app_toolbar)
-    Toolbar mToolbar;
+    @Bind(R.id.home_navigation_view)
+    NavigationView mNavigationView;
+    @Bind(R.id.home_iv_draw)
+    ImageView mIvDraw;
+    @Bind(R.id.home_tv_title)
+    TextView mTvTitle;
+    @Bind(R.id.home_iv_menu)
+    ImageView mIvMenu;
+    @Bind(R.id.contacts_tab_rl)
+    LinearLayout mContactsTabRl;
 
     private static final int[] SELECTED_ICONS = new int[]{R.drawable.diary_selected, R.drawable.duanzi_selected, R.drawable.meizi_selected};
     private static final int[] UN_SELECTED_ICONS = new int[]{R.drawable.diary_unselected, R.drawable.duanzi_unselected, R.drawable.meizi_unselected};
     private static final String[] TITLES = new String[]{"日记", "段子", "妹子"};
-    @Bind(R.id.home_navigation_view)
-    NavigationView mNavigationView;
-
 
     private List<Fragment> mFragments;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);
         context.startActivity(intent);
-
     }
 
     @Override
@@ -77,17 +84,22 @@ public class HomeActivity extends AppCompatActivity {
         initVierPager();
         initToolbar();
         initNavigationView();
+
     }
 
     private void initNavigationView() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
-        mDrawerLayout.addDrawerListener(toggle);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+//        mDrawerLayout.addDrawerListener(toggle);
     }
 
 
     private void initToolbar() {
-        mToolbar.setNavigationIcon(R.mipmap.ic_launcher_round);
-        mToolbar.setTitle("SleepHelper");
+        mIvDraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(Gravity.START);
+            }
+        });
     }
 
     private void initVierPager() {
@@ -142,7 +154,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Subscribe
-    public void startUpdateDiaryActivity(StartUpdateDiaryEvent event){
+    public void startUpdateDiaryActivity(StartUpdateDiaryEvent event) {
         DiaryBean diaryBean = event.getDiaryBean();
         String title = diaryBean.getTitle();
         String content = diaryBean.getContent();
