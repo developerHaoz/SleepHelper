@@ -48,7 +48,7 @@ public class AddDiaryActivity extends AppCompatActivity {
     FloatingActionsMenu mRightLabels;
     @Bind(R.id.home_iv_draw)
     ImageView mIvDraw;
-    @Bind(R.id.home_tv_title)
+    @Bind(R.id.home_tv_title_normal)
     TextView mTvTitle;
     @Bind(R.id.home_iv_menu)
     ImageView mIvMenu;

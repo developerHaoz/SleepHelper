@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,8 +55,10 @@ public class HomeActivity extends AppCompatActivity {
     NavigationView mNavigationView;
     @Bind(R.id.home_iv_draw)
     ImageView mIvDraw;
-    @Bind(R.id.home_tv_title)
-    TextView mTvTitle;
+    @Bind(R.id.home_tv_title_normal)
+    TextView mTvNormal;
+    @Bind(R.id.home_tv_title_center)
+    TextView mTvCenter;
     @Bind(R.id.home_iv_menu)
     ImageView mIvMenu;
     @Bind(R.id.contacts_tab_rl)
@@ -83,23 +84,13 @@ public class HomeActivity extends AppCompatActivity {
         initTabLayout();
         initVierPager();
         initToolbar();
-        initNavigationView();
-
     }
-
-    private void initNavigationView() {
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
-//        mDrawerLayout.addDrawerListener(toggle);
-    }
-
 
     private void initToolbar() {
-        mIvDraw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawerLayout.openDrawer(Gravity.START);
-            }
-        });
+        mIvDraw.setVisibility(View.GONE);
+        mIvMenu.setVisibility(View.GONE);
+        mTvCenter.setVisibility(View.VISIBLE);
+        mTvNormal.setVisibility(View.GONE);
     }
 
     private void initVierPager() {

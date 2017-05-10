@@ -17,8 +17,11 @@ import android.widget.TextView;
 
 import com.example.developerhaoz.sleephelper.R;
 import com.example.developerhaoz.sleephelper.diary.db.DiaryDatabaseHelper;
+import com.example.developerhaoz.sleephelper.diary.event.RefreshViewEvent;
 import com.example.developerhaoz.sleephelper.diary.utils.GetDate;
 import com.example.developerhaoz.sleephelper.diary.widget.LinedEditText;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,8 +55,10 @@ public class UpdateDiaryActivity extends AppCompatActivity {
     TextView mTvTag;
     @Bind(R.id.home_iv_draw)
     ImageView mIvDraw;
-    @Bind(R.id.home_tv_title)
+    @Bind(R.id.home_tv_title_normal)
     TextView mTvTitle;
+    @Bind(R.id.home_tv_title_center)
+    TextView mTvCenter;
     @Bind(R.id.home_iv_menu)
     ImageView mIvMenu;
     @Bind(R.id.contacts_tab_rl)
@@ -137,6 +142,7 @@ public class UpdateDiaryActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
             }
         }).show();
+        EventBus.getDefault().post(new RefreshViewEvent());
     }
 
     @Override
