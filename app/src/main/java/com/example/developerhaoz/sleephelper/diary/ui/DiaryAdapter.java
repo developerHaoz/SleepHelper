@@ -84,7 +84,6 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
     }
 
     public static class DiaryViewHolder extends RecyclerView.ViewHolder{
-
         TextView mTvDate;
         TextView mTvTitle;
         TextView mTvContent;

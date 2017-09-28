@@ -5,7 +5,6 @@ import android.content.Context;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.squareup.leakcanary.LeakCanary;
 
 /**
  * 自定义的 Application
@@ -23,10 +22,6 @@ public class SleepApplication extends Application {
         super.onCreate();
         mContext = this;
         requestQueue = Volley.newRequestQueue(mContext);
-        if(LeakCanary.isInAnalyzerProcess(this)){
-            return;
-        }
-        LeakCanary.install(this);
     }
 
     public static Context getContext(){

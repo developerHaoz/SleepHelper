@@ -34,8 +34,6 @@ import cc.trity.floatingactionbutton.FloatingActionsMenu;
 
 public class AddDiaryActivity extends AppCompatActivity {
 
-    @Bind(R.id.add_diary_tv_date)
-    TextView mAddDiaryTvDate;
     @Bind(R.id.add_diary_et_title)
     EditText mAddDiaryEtTitle;
     @Bind(R.id.add_diary_et_content)
@@ -54,7 +52,6 @@ public class AddDiaryActivity extends AppCompatActivity {
     ImageView mIvMenu;
     @Bind(R.id.contacts_tab_rl)
     LinearLayout mContactsTabRl;
-
 
     private DiaryDatabaseHelper mHelper;
 
@@ -82,7 +79,6 @@ public class AddDiaryActivity extends AppCompatActivity {
 
     private void initView(Intent intent) {
         mAddDiaryEtTitle.setText(intent.getStringExtra("title"));
-        mAddDiaryTvDate.setText("今天，" + GetDate.getDate());
         mAddDiaryEtContent.setText(intent.getStringExtra("content"));
     }
 

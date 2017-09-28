@@ -1,13 +1,14 @@
 package com.example.developerhaoz.sleephelper.meizi.api;
 
 import android.content.Context;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.developerhaoz.sleephelper.common.utils.GetRandom;
 import com.example.developerhaoz.sleephelper.common.SleepApplication;
+import com.example.developerhaoz.sleephelper.common.utils.GetRandom;
 import com.orhanobut.logger.Logger;
 
 /**

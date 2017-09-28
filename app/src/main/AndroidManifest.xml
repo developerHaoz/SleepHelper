@@ -9,21 +9,27 @@
     <application
         android:name=".common.SleepApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <!--添加日记-->
-        <activity android:name=".diary.ui.AddDiaryActivity"/>
+        <activity android:name=".diary.ui.AddDiaryActivity"
+                  android:windowSoftInputMode="adjustPan"
+        >
+
+        </activity>
 
         <!--测试用的 Activity-->
         <activity android:name=".common.TestActivity">
         </activity>
 
         <!--修改日记-->
-        <activity android:name=".diary.ui.UpdateDiaryActivity"/>
+        <activity android:name=".diary.ui.UpdateDiaryActivity"
+                  android:windowSoftInputMode="adjustPan"
+            />
 
         <!--主界面的 Activity-->
         <activity android:name=".common.HomeActivity">

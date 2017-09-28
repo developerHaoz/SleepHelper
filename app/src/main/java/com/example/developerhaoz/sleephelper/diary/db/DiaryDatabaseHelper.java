@@ -21,8 +21,6 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper{
             + "tag text, "
             + "content text)";
 
-
-
     public DiaryDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, name, factory, version);
         this.mContext = context;
@@ -34,7 +32,6 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
         db.execSQL("drop table if exists Diary");
         onCreate(db);
     }

@@ -7,6 +7,7 @@ package com.example.developerhaoz.sleephelper.diary.bean;
  */
 
 public class DiaryBean {
+
     private String date;
     private String title;
     private String content;

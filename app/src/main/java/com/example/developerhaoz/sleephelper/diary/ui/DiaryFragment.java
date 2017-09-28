@@ -28,10 +28,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
 /**
  * 有关日记的 Fragment
- *
+ * <p>
  * Created by developerHaoz on 2017/5/2.
  */
 
@@ -55,6 +54,10 @@ public class DiaryFragment extends Fragment {
     FloatingActionButton mFabEnterEdit;
     @Bind(R.id.main_rl_main)
     RelativeLayout mRlMain;
+    @Bind(R.id.main_ll_date)
+    LinearLayout mLlDate;
+    @Bind(R.id.main_ll_content)
+    LinearLayout mLlContent;
 
     private List<DiaryBean> mDiaryBeanList;
     private DiaryDatabaseHelper mDatabaseHelper;
@@ -94,8 +97,9 @@ public class DiaryFragment extends Fragment {
                 String dateSystem = GetDate.getDate().toString();
                 if (date.equals(dateSystem)) {
                     mLlMain.removeView(mItemFirst);
+                    break;
                 }
-                break;
+
             } while (cursor.moveToNext());
         }
 
@@ -122,6 +126,7 @@ public class DiaryFragment extends Fragment {
         super.onResume();
         getDiaryBeanList();
         initView();
+
     }
 
     @Override

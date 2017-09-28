@@ -16,10 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.developerhaoz.sleephelper.R;
+import com.example.developerhaoz.sleephelper.common.HomeActivity;
 import com.example.developerhaoz.sleephelper.diary.db.DiaryDatabaseHelper;
 import com.example.developerhaoz.sleephelper.diary.event.RefreshViewEvent;
 import com.example.developerhaoz.sleephelper.diary.utils.GetDate;
 import com.example.developerhaoz.sleephelper.diary.widget.LinedEditText;
+import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -83,6 +85,9 @@ public class UpdateDiaryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         initToolbar();
         initView(intent);
+        String url = "http://ww3.sinaimg.cn/large/7a8aed7bgw1eswencfur6j20hq0qodhs.jpg";
+        Logger.d(mIvDraw.getContext() + " Activity");
+
     }
 
     private void initToolbar() {
@@ -137,6 +142,8 @@ public class UpdateDiaryActivity extends AppCompatActivity {
                 SQLiteDatabase dbDelete = mHelper.getWritableDatabase();
                 dbDelete.delete("Diary", "tag = ?", new String[]{tag});
                 finish();
+                HomeActivity.startActivity(UpdateDiaryActivity.this);
+
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {

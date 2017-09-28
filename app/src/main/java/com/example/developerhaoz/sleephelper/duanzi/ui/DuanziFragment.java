@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.developerhaoz.sleephelper.R;
@@ -26,17 +27,16 @@ import butterknife.ButterKnife;
 
 /**
  * 有关段子的 Fragment
- * <p>
+ *
  * Created by developerHaoz on 2017/5/2.
  */
 
-public class DuanziFragment extends Fragment {
+public class DuanziFragment extends Fragment implements DuanziAdapter.OnItemClickCallback{
 
     @Bind(R.id.duanzi_rv_show_duanzi)
     RecyclerView mRvShowDuanzi;
     @Bind(R.id.duanzi_refresh)
     SwipeRefreshLayout mRefresh;
-
 
     public static DuanziFragment newInstance() {
         return new DuanziFragment();
@@ -68,9 +68,11 @@ public class DuanziFragment extends Fragment {
             @Override
             public void onSuccess(String response) {
                 List<DuanziBean> mDuanziBeanList = GsonHelper.getDuanziBeanList(response);
-                mDuanziBeanList.remove(3);
+                if(mDuanziBeanList.size() > 4){
+                    mDuanziBeanList.remove(3);
+                }
                 mRvShowDuanzi.setLayoutManager(new LinearLayoutManager(getActivity()));
-                mRvShowDuanzi.setAdapter(new DuanziAdapter(DuanziFragment.this, mDuanziBeanList));
+                mRvShowDuanzi.setAdapter(new DuanziAdapter(DuanziFragment.this, mDuanziBeanList, DuanziFragment.this));
             }
 
             @Override
@@ -84,5 +86,10 @@ public class DuanziFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(getActivity(), position, Toast.LENGTH_SHORT).show();
     }
 }

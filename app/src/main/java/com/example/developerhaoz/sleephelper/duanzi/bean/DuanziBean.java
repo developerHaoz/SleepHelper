@@ -30,5 +30,4 @@ public class DuanziBean {
         this.type = type;
     }
 
-
 }

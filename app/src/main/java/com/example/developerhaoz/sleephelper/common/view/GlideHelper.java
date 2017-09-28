@@ -24,9 +24,11 @@ public class GlideHelper {
      * @param imageUrl 图片的网络地址
      * @return 图片的缓存地址
      */
-    public static String getImagePathFromCache(String imageUrl, Context context){
+    public static String getImagePathFromCache(String imageUrl, Context context) {
 
-        FutureTarget<File> futureTarget = Glide.with(context).load(imageUrl).downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
+        FutureTarget<File> futureTarget = Glide.with(context)
+                .load(imageUrl)
+                .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
         File cacheFile;
         try {
             cacheFile = futureTarget.get();

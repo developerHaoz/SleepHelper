@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.developerhaoz.sleephelper.R;
+import com.example.developerhaoz.sleephelper.common.utils.Check;
 import com.example.developerhaoz.sleephelper.duanzi.bean.DuanziBean;
 
 import java.util.List;
@@ -23,12 +24,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DuanziAdapter extends RecyclerView.Adapter<DuanziAdapter.DuanziViewHolder>{
 
+    private  OnItemClickCallback mCallback;
+
+    public interface OnItemClickCallback{
+        void onItemClick(int position);
+    }
+
     private Fragment mFragment;
     private List<DuanziBean> mDuanziBeanList;
 
-    public DuanziAdapter(Fragment fragment, List<DuanziBean> duanziBeanList){
+    public DuanziAdapter(Fragment fragment, List<DuanziBean> duanziBeanList, OnItemClickCallback callback){
         this.mFragment = fragment;
         this.mDuanziBeanList = duanziBeanList;
+        this.mCallback = callback;
     }
 
     @Override
@@ -39,9 +47,12 @@ public class DuanziAdapter extends RecyclerView.Adapter<DuanziAdapter.DuanziView
 
     @Override
     public void onBindViewHolder(DuanziViewHolder holder, int position) {
+        RecyclerView rvTest = (RecyclerView) holder.itemView.getParent();
         try {
             DuanziBean duanziBean = mDuanziBeanList.get(position);
-            Glide.with(mFragment).load(duanziBean.getGroupBean().getUser().getAvatar_url()).into(holder.mCivAvatar);
+            if (!Check.isEmpty(duanziBean.getGroupBean().getUser().getAvatar_url())) {
+                Glide.with(mFragment).load(duanziBean.getGroupBean().getUser().getAvatar_url()).into(holder.mCivAvatar);
+            }
             holder.mTvContent.setText(duanziBean.getGroupBean().getText());
             holder.mTvAuthor.setText(duanziBean.getGroupBean().getUser().getName());
         } catch (Exception e) {
@@ -54,7 +65,7 @@ public class DuanziAdapter extends RecyclerView.Adapter<DuanziAdapter.DuanziView
         return mDuanziBeanList.size();
     }
 
-    public static class DuanziViewHolder extends RecyclerView.ViewHolder{
+      class DuanziViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private CircleImageView mCivAvatar;
         private TextView mTvAuthor;
@@ -65,6 +76,11 @@ public class DuanziAdapter extends RecyclerView.Adapter<DuanziAdapter.DuanziView
             mCivAvatar = (CircleImageView) itemView.findViewById(R.id.duanzi_civ_avatar);
             mTvAuthor = (TextView) itemView.findViewById(R.id.duanzi_tv_author);
             mTvContent = (TextView) itemView.findViewById(R.id.duanzi_tv_content);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mCallback.onItemClick(getAdapterPosition());
         }
     }
 

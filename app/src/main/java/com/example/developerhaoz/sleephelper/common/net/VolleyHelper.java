@@ -16,6 +16,8 @@ import com.android.volley.toolbox.Volley;
 
 public class VolleyHelper {
 
+    private static String response;
+
     /**
      * 用于发送 Get 请求的封装方法
      *
@@ -38,6 +40,24 @@ public class VolleyHelper {
             }
         });
         requestQueue.add(stringRequest);
+    }
+
+    public static String sendHttpGet(Context context, String url){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(url
+                , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                response = s;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(stringRequest);
+        return response;
     }
 
 

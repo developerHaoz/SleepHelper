@@ -23,20 +23,10 @@
             android:paddingRight="20dp"
             >
 
-            <TextView
-                android:id="@+id/add_diary_tv_date"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical"
-                android:paddingRight="5dp"
-                android:text="今天，2017年01月19日"
-                android:textSize="15sp"
-                />
-
             <EditText
                 android:id="@+id/add_diary_et_title"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:background="@drawable/shape_add_diary_title"
                 android:enabled="true"
                 android:gravity="top"
