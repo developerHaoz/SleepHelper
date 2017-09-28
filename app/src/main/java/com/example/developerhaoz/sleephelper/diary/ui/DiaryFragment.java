@@ -30,7 +30,7 @@ import butterknife.OnClick;
 
 /**
  * 有关日记的 Fragment
- * <p>
+ *
  * Created by developerHaoz on 2017/5/2.
  */
 
