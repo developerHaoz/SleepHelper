@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.example.developerhaoz.sleephelper"
-        minSdkVersion 15
+        minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile files('libs/volley.jar')
+
 
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.8@aar'

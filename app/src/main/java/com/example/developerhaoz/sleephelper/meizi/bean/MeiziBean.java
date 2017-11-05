@@ -29,7 +29,15 @@ public class MeiziBean {
         return imageUrl;
     }
 
+    public void setImageUrl(String imageUrl){
+        this.imageUrl = imageUrl;
+    }
+
     public MeiziBean(String imageUrl){
         this.imageUrl = imageUrl;
+    }
+
+    public MeiziBean(){
+
     }
 }

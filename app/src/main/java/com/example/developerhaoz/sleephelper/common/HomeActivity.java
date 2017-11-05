@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final int[] SELECTED_ICONS = new int[]{R.drawable.diary_selected, R.drawable.duanzi_selected, R.drawable.meizi_selected};
     private static final int[] UN_SELECTED_ICONS = new int[]{R.drawable.diary_unselected, R.drawable.duanzi_unselected, R.drawable.meizi_unselected};
-    private static final String[] TITLES = new String[]{"日记", "段子", "妹子"};
+    private static final String[] TITLES = new String[]{"日记", "段子", "风景"};
 
     private List<Fragment> mFragments;
 

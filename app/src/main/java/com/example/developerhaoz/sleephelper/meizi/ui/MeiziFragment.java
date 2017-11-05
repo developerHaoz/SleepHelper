@@ -10,18 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.VolleyError;
 import com.example.developerhaoz.sleephelper.R;
-import com.example.developerhaoz.sleephelper.common.net.VolleyHelper;
-import com.example.developerhaoz.sleephelper.common.net.VolleyResponseCallback;
 import com.example.developerhaoz.sleephelper.meizi.api.MeiziApi;
 import com.example.developerhaoz.sleephelper.meizi.bean.MeiziBean;
-import com.example.developerhaoz.sleephelper.meizi.utils.GsonHelper;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -72,21 +69,29 @@ public class MeiziFragment extends Fragment {
 
     private void initView() {
 
-        VolleyHelper.sendHttpGet(getActivity(), MeiziApi.getMeiziApi(), new VolleyResponseCallback() {
-            @Override
-            public void onSuccess(String s) {
-                response = s;
-                meiziBeanList = GsonHelper.getMeiziBean(response);
-                mRvShowMeizi.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                Collections.shuffle(meiziBeanList);
-                mRvShowMeizi.setAdapter(new MeiziAdapter(meiziBeanList, MeiziFragment.this));
-            }
+        Set<MeiziBean> meiziSet = new HashSet<>();
+        meiziSet.addAll(MeiziApi.getMeiziBeanList());
+        meiziBeanList.clear();
+        meiziBeanList.addAll(meiziSet);
+        Collections.shuffle(meiziBeanList);
+        mRvShowMeizi.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        mRvShowMeizi.setAdapter(new MeiziAdapter(meiziBeanList, MeiziFragment.this));
 
-            @Override
-            public void onError(VolleyError error) {
-                Logger.d(error);
-            }
-        });
+//        VolleyHelper.sendHttpGet(getActivity(), MeiziApi.getMeiziApi(), new VolleyResponseCallback() {
+//            @Override
+//            public void onSuccess(String s) {
+//                response = s;
+//                meiziBeanList = GsonHelper.getMeiziBean(response);
+//                mRvShowMeizi.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+//                Collections.shuffle(meiziBeanList);
+//                mRvShowMeizi.setAdapter(new MeiziAdapter(meiziBeanList, MeiziFragment.this));
+//            }
+//
+//            @Override
+//            public void onError(VolleyError error) {
+//                Logger.d(error);
+//            }
+//        });
     }
 
     @Override
