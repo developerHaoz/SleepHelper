@@ -14,7 +14,7 @@
 [手把手教你从零开始做一个好看的 APP - Day five](http://www.jianshu.com/p/de45bc5c75e2)
 
 在开始写正文之前，先来一波效果的展示，看看五天过后我们能实现怎样的效果
-![SleepHelper.gif](http://upload-images.jianshu.io/upload_images/4334738-274fe61ae357dec1.gif?imageMogr2/auto-orient/strip)
+![SleepHelper](http://upload-images.jianshu.io/upload_images/4334738-acaaea47739bc4b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 本次的教程分为 5 天，内容分别为：
 - Day one，准备
