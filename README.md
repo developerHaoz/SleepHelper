@@ -2,6 +2,7 @@
 > 从零开始，手把手带你实现一个「专注睡前的 APP」。睡觉之前如果能有一个 APP，能让我们写一写这一天的见闻或者心得，同时又能看一会段子、瞄一会好看的妹子，放松一下疲惫的身心那该多好，这也是我完成这个 APP 的原因。APP 的全部代码我已经分享到 Github 上了，需要的直接 [点击这里](https://github.com/developerHaoz/SleepHelper)，如果喜欢的话，麻烦给个 star，谢谢啦。
 
 在开始写正文之前，先来一波效果的展示，看看五天过后我们能实现怎样的效果
+
 ![SleepHelper](http://upload-images.jianshu.io/upload_images/4334738-acaaea47739bc4b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 本次的教程分为 5 天，内容分别为：
